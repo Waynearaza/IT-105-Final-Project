@@ -1,0 +1,11 @@
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+#board {
+  height: 540px;
+  width: 630px; /* You can adjust this width as needed */
+  margin: 0 auto;
+  background-color: #f0f0f0; /* Optional: gives the board a background */
+}
