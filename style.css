@@ -6,6 +6,34 @@ body{
 #board {
   height: 540px;
   width: 630px; /* You can adjust this width as needed */
+  
+
+  background-color: blue;
+  border: 10px solid navy;
+  
+  
+  
   margin: 0 auto;
-  background-color: #f0f0f0; /* Optional: gives the board a background */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tile{
+  height: 70px;
+  width: 70px;
+  margin: 5px;
+
+  background-color: white;
+  border-radius: 50%;
+  border: 5px solid navy;
+}
+
+.red-piece {
+  background-color: red;
+
+}
+
+.yellow-piece{
+  background-color: yellow;
+
 }
