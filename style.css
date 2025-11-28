@@ -1,39 +1,126 @@
-body{
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
+:root {
+    --rows: 6;
+    --cols: 7;
+    --cell-size: 60px;
 }
 
-#board {
-  height: 540px;
-  width: 630px; /* You can adjust this width as needed */
-  
-
-  background-color: blue;
-  border: 10px solid navy;
-  
-  
-  
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
 }
 
-.tile{
-  height: 70px;
-  width: 70px;
-  margin: 5px;
-
-  background-color: white;
-  border-radius: 50%;
-  border: 5px solid navy;
+.container {
+    text-align: center;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.red-piece {
-  background-color: red;
-
+h1 {
+    color: #333;
 }
 
-.yellow-piece{
-  background-color: yellow;
+#status {
+    margin: 20px 0;
+    font-size: 1.2em;
+    font-weight: bold;
+}
 
+#game-board {
+    display: grid;
+    /* Create a 7-column grid for the board */
+    grid-template-columns: repeat(var(--cols), var(--cell-size));
+    background-color: #4169e1; /* Connect Four Blue */
+    border: 5px solid #2a52be;
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer; /* Indicates the board is clickable */
+}
+
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    /* Make the cell look like a circular hole */
+    background-color: #ffffff;
+    border-radius: 50%;
+    margin: 3px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    /* Flexbox to center the piece inside the cell */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+/* Styles for the pieces dropped inside the cell */
+.piece {
+    width: calc(var(--cell-size) - 10px);
+    height: calc(var(--cell-size) - 10px);
+    border-radius: 50%;
+    /* Start the piece off-screen for a dropping animation */
+    transform: translateY(-500%); 
+    transition: transform 0.5s ease-out; /* Animation for dropping */
+}
+
+/* Actual color of the pieces */
+.red {
+    background-color: #ff0000;
+}
+
+.yellow {
+    background-color: #ffc400;
+}
+
+/* Style to make the piece drop into place */
+.dropped {
+    transform: translateY(0);
+}
+
+#reset-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#reset-button:hover {
+    background-color: #555;
+}
+
+/* Indicate which column the mouse is over */
+.cell:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for the current player indicator */
+#current-player.red {
+    color: #ff0000;
+}
+
+#current-player.yellow {
+    color: #ffc400;
+}
+
+/* New styles for difficulty selector */
+.controls {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+#difficulty {
+    padding: 5px;
+    border-radius: 4px;
+    margin-left: 10px;
 }

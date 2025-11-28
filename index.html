@@ -1,15 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Connect 4</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Four AI</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Connect 4</h1>
-  <h2 id="winner"></h2>
-  <div id="board"></div>
+
+    <div class="container">
+        <h1>Connect Four 🟡 vs. 🔴 AI</h1>
+
+        <div class="controls">
+            <label for="difficulty">Select Difficulty:</label>
+            <select id="difficulty">
+                <option value="1">Easy</option>
+                <option value="4" selected>Medium</option>
+                <option value="6">Hard</option>
+            </select>
+        </div>
+        
+        <div id="status">Player: <span id="current-player">Red</span></div>
+
+        <div id="game-board">
+            </div>
+
+        <button id="reset-button">Restart Game</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
