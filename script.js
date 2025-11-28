@@ -6,12 +6,28 @@ let currentPlayer = PLAYER_HUMAN;
 let board;
 let gameOver = false;
 
+let humanScore = 0;
+let aiScore = 0;
+let gamesPlayed = 0;
+const maxGames = 3;
+
+// DOM elements for scoreboard
+const humanScoreEl = document.getElementById('human-score');
+const aiScoreEl = document.getElementById('ai-score');
+const winnerBanner = document.getElementById('winner-banner');
+
+
+
 // DOM elements
 const gameBoardEl = document.getElementById('game-board');
 const statusEl = document.getElementById('status');
 const currentPlayerEl = document.getElementById('current-player');
+
 const resetButton = document.getElementById('reset-button');
-const difficultyEl = document.getElementById('difficulty'); // NEW
+const difficultyEl = document.getElementById('difficulty');
+// --- TURN NOTIFICATION setup ---
+const turnNotifyEl = document.getElementById('turn-notify');
+
 
 // --- Initialization and Reset ---
 
@@ -143,9 +159,24 @@ function checkGameStatus(r, c) {
         gameOver = true;
         const winnerColor = currentPlayer === PLAYER_HUMAN ? 'Red' : 'Yellow';
         updateStatus(winnerColor);
+        notifyTurn('');
+
+        // Update scoreboard
+        if (currentPlayer === PLAYER_HUMAN) humanScore++;
+        else aiScore++;
+        gamesPlayed++;
+
+        updateScoreboard();
+        checkBestOf3Winner();
     } else if (isBoardFull()) {
         gameOver = true;
         updateStatus('Tie');
+        notifyTurn('');
+
+        // Tie counts as a game played but no score
+        gamesPlayed++;
+        updateScoreboard();
+        checkBestOf3Winner();
     }
 }
 
@@ -283,3 +314,104 @@ function getNextAvailableRowForTempBoard(tempBoard, col) {
 
 // --- Start the Game ---
 initBoard();
+
+
+// Function to update turn display
+function notifyTurn(playerColor) {
+  if (playerColor) {
+    turnNotifyEl.textContent = `${playerColor} Turn`;
+    turnNotifyEl.style.color = playerColor === "Red" ? "#ff0000" : "#ffc400";
+  } else {
+    turnNotifyEl.textContent = "";
+  }
+}
+
+// Modify initBoard to show first turn
+function initBoard() {
+  board = Array(ROWS).fill(0).map(() => Array(COLS).fill(0));
+  gameBoardEl.innerHTML = '';
+  gameOver = false;
+  currentPlayer = PLAYER_HUMAN;
+  updateStatus('Red');
+  notifyTurn('Red');  // <-- show first turn
+
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      cell.dataset.col = c;
+      cell.addEventListener('click', handleMove);
+      gameBoardEl.appendChild(cell);
+    }
+  }
+}
+
+// In switchPlayer, after updateStatus, also call notifyTurn
+function switchPlayer() {
+  currentPlayer = currentPlayer === PLAYER_HUMAN ? PLAYER_AI : PLAYER_HUMAN;
+  const playerColor = currentPlayer === PLAYER_HUMAN ? 'Red' : 'Yellow';
+  updateStatus(playerColor);
+  notifyTurn(playerColor);  // <-- update turn display
+}
+
+function checkGameStatus(r, c) {
+    if (checkWin(r, c, currentPlayer)) {
+        gameOver = true;
+        const winnerColor = currentPlayer === PLAYER_HUMAN ? 'Red' : 'Yellow';
+        updateStatus(winnerColor);
+        notifyTurn('');
+
+        // Update scores
+        if (currentPlayer === PLAYER_HUMAN) humanScore++;
+        else aiScore++;
+        gamesPlayed++;
+
+        updateScoreboard();
+        checkBestOf3Winner();
+
+    } else if (isBoardFull()) {
+        gameOver = true;
+        updateStatus('Tie');
+        notifyTurn('');
+
+        // Tie counts as a game played but no score
+        gamesPlayed++;
+        updateScoreboard();
+        checkMatchWinner();
+    }
+}
+
+
+function updateScoreboard() {
+    humanScoreEl.textContent = humanScore;
+    aiScoreEl.textContent = aiScore;
+    gamesPlayedEl.textContent = gamesPlayed;
+}
+
+
+function resetSeries() {
+    humanScore = 0;
+    aiScore = 0;
+    gamesPlayed = 0;
+    updateScoreboard();
+    initBoard();
+}
+function checkMatchWinner() {
+    if (humanScore >= 3) {
+        winnerBanner.textContent = "RED WINS MATCH!";
+        winnerBanner.className = "red";
+        winnerBanner.style.display = "block";
+        gameOver = true;
+        return true;
+    }
+    
+if (aiScore >= 3) {
+ 
+        winnerBanner.textContent = "AI WINS MATCH!";
+        winnerBanner.className = "yellow";
+        winnerBanner.style.display = "block";
+        gameOver = true;
+        return true;
+    }
+    return false;
+}

@@ -1,33 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect Four AI</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connect Four AI</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <div class="container">
-        <h1>Connect Four 🟡 vs. 🔴 AI</h1>
+  <div class="container">
+    <h1>Connect Four</h1>
+    <h2>Player 🟡 vs. 🔴 AI</h2>
 
-        <div class="controls">
-            <label for="difficulty">Select Difficulty:</label>
-            <select id="difficulty">
-                <option value="1">Easy</option>
-                <option value="4" selected>Medium</option>
-                <option value="6">Hard</option>
-            </select>
-        </div>
-        
-        <div id="status">Player: <span id="current-player">Red</span></div>
-
-        <div id="game-board">
-            </div>
-
-        <button id="reset-button">Restart Game</button>
+    <div class="controls">
+      <label for="difficulty">Select Difficulty:</label>
+      <select id="difficulty">
+        <option value="1">Easy</option>
+        <option value="4" selected>Medium</option>
+        <option value="6">Hard</option>
+      </select>
     </div>
 
-    <script src="script.js"></script>
+    <div id="scoreboard">
+  <p>Red: <span id="human-score">0</span>
+    ||  Yellow: <span id="ai-score">0</span></p>
+    
+</div>
+
+
+    <div id="status">
+      Player: <span id="current-player">Red</span>
+    </div>
+
+    <div id ="turn-notify" ></div>
+
+    <div id="game-board"></div>
+
+    
+
+
+    <button id="reset-button">Restart Game</button>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
