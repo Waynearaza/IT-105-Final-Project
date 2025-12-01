@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Connect 4</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="title">Connect 4</div>
+    <div class="controls">
+      <div class="mode-group">
+        <label for="mode">Mode:</label>
+        <select id="mode">
+          <option value="pvp">Two players (local)</option>
+          <option value="cpu">One player vs computer</option>
+        </select>
+      </div>
+      <div class="difficulty-group" id="difficultyWrap">
+        <label for="difficulty">Difficulty:</label>
+        <select id="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+      <button id="newGameBtn" class="btn">New game</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="statusbar">
+      <div class="turn" id="turnText">Turn: Player 1 (Red)</div>
+      <div class="scores">
+        <span>Player 1: <strong id="scoreP1">0</strong></span>
+        <span id="scoreP2Wrap">Player 2: <strong id="scoreP2">0</strong></span>
+        <span id="scoreCPUWrap" class="hidden">CPU: <strong id="scoreCPU">0</strong></span>
+      </div>
+    </section>
+
+    <section class="board-wrap">
+      <div id="hoverRow" class="hover-row"></div>
+      <div id="board" class="board" aria-label="Connect 4 board"></div>
+    </section>
+
+    <section class="message-area">
+      <div id="message"></div>
+      <button id="resetBtn" class="btn secondary">Reset scores</button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>Tip: Click a column to drop your piece. First to connect 4 wins.</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
