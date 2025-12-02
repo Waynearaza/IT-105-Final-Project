@@ -1,10 +1,10 @@
 # Connect 4 Web Game
 
-* **[Rommel Bayaborda]** - *[Role, e.g., Frontend Logic]*
-* **[Piolo Constante]** - *[Role, e.g., UI/UX Design]*
-* **[Aivan Rivero]** - *[Role, e.g., AI Algorithm]*
-* **[Carlo Creus]** - *[Role, e.g., AI Algorithm]*
-* **[Aerionne Wayne Araza]** - *[Role, e.g., Quality Assurance]*
+* **[Rommel Bayaborda]** - *[Role-Frontend]*
+* **[Piolo Constante]** - *[Role-UI/UX Design]*
+* **[Aivan Rivero]** - *[Role-AI Algorithm]*
+* **[Carlo Creus]** - *[Role-AI Algorithm]*
+* **[Aerionne Wayne Araza]** - *[Role-Leader & Quality Tester]*
 
 ## Description
 
