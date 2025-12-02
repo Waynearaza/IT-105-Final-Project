@@ -1,14 +1,10 @@
-/* =========================================
-   CONFIGURATION & CONSTANTS
-   ========================================= */
 const ROWS = 6;
 const COLS = 7;
 const P1 = 1;      // Player 1 ID (Red)
 const P2 = 2;      // Player 2 ID (Yellow - Human or CPU)
 
-/* =========================================
-   GAME STATE VARIABLES
-   ========================================= */
+//GAME STATE VARIABLES
+
 let grid = [];           // 2D Array representing the board data
 let current = P1;        // Tracks whose turn it is
 let locked = false;      // Locks input during animations
@@ -17,9 +13,7 @@ let difficulty = 'medium'; // AI Difficulty level
 let scores = { p1: 0, p2: 0, cpu: 0 }; 
 let gameActive = false;  // Prevents moves when on the start screen
 
-/* =========================================
-   DOM ELEMENTS
-   ========================================= */
+//DOM ELEMENTS
 const startScreen = document.getElementById('startScreen');
 const gameScreen = document.getElementById('gameScreen');
 const boardEl = document.getElementById('board');
@@ -34,9 +28,7 @@ const scoreCPUEl = document.getElementById('scoreCPU');
 const scoreP2Wrap = document.getElementById('scoreP2Wrap');
 const scoreCPUWrap = document.getElementById('scoreCPUWrap');
 
-/* =========================================
-   INITIALIZATION
-   ========================================= */
+//INITIALIZATION
 init();
 
 function init() {
@@ -106,9 +98,7 @@ function createGrid() {
   return Array.from({ length: ROWS }, () => Array(COLS).fill(0));
 }
 
-/* =========================================
-   RENDERING
-   ========================================= */
+//RENDERING
 
 function renderHoverRow() {
   hoverRowEl.innerHTML = '';
@@ -175,10 +165,7 @@ function updateScores() {
   scoreCPUEl.textContent = scores.cpu;
 }
 
-/* =========================================
-   GAMEPLAY LOGIC
-   ========================================= */
-
+//GAMEPLAY LOGICS
 function tryMove(col) {
   if (locked || !gameActive) return;
   
@@ -271,9 +258,7 @@ function highlightWin(cells) {
   });
 }
 
-/* =========================================
-   HELPER & AI FUNCTIONS
-   ========================================= */
+//HELPER & AI FUNCTIONS
 
 function getPlayerName(p) {
   if (p === P1) return 'Player 1';
