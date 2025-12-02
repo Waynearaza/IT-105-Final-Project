@@ -61,11 +61,5 @@ To share the game with others:
 3.  Select the `main` branch as the source.
 4.  GitHub will provide a live URL for your game.
 
-## 🛠️ Tech Stack
-
-* **HTML5:** Semantic structure and game layout.
-* **CSS3:** Custom properties (variables), Flexbox/Grid layouts, CSS Animations, and Z-index layering for the 3D board effect.
-* **JavaScript (ES6+):** Game logic, DOM manipulation, Animation API, and Minimax AI algorithm.
-
 ---
 *Created for [IT-105/Final Project] - [2025]*
