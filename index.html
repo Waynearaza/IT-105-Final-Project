@@ -2,45 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Connect Four AI</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Connect 4</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-  <div class="container">
-    <h1>Connect Four</h1>
-    <h2>Player 🟡 vs. 🔴 AI</h2>
-
-    <div class="controls">
-      <label for="difficulty">Select Difficulty:</label>
-      <select id="difficulty">
-        <option value="1">Easy</option>
-        <option value="4" selected>Medium</option>
-        <option value="6">Hard</option>
-      </select>
+  <section id="startScreen" class="start-screen">
+    <div class="logo-area">
+      <h1 class="main-title">CONNECT <span class="accent-text">4</span></h1>
     </div>
-
-    <div id="scoreboard">
-  <p>Red: <span id="human-score">0</span>
-    ||  Yellow: <span id="ai-score">0</span></p>
     
-</div>
-
-
-    <div id="status">
-      Player: <span id="current-player">Red</span>
+    <div class="menu-controls">
+      <button id="startPvpBtn" class="btn btn-large">
+        Two Players (Local)
+      </button>
+      <button id="startCpuBtn" class="btn btn-large">
+        Player vs CPU
+      </button>
     </div>
+  </section>
 
-    <div id ="turn-notify" ></div>
+  <section id="gameScreen" class="game-container hidden">
+    <header class="topbar">
+      <div class="left-controls">
+        <button id="backToMenuBtn" class="btn secondary">← Menu</button>
+      </div>
+      
+      <div class="center-info">
+        <div class="difficulty-group hidden" id="difficultyWrap">
+          <label for="difficulty">Level:</label>
+          <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="right-controls">
+        <button id="rematchBtn" class="btn primary">Rematch ↻</button>
+      </div>
+    </header>
 
-    <div id="game-board"></div>
+    <main>
+      <div id="winBanner" class="win-banner"></div>
 
-    
+      <section class="statusbar">
+        <div class="turn" id="turnText">Turn: Player 1 (Red)</div>
+        <div class="scores">
+          <span>P1: <strong id="scoreP1">0</strong></span>
+          <span id="scoreP2Wrap">P2: <strong id="scoreP2">0</strong></span>
+          <span id="scoreCPUWrap" class="hidden">CPU: <strong id="scoreCPU">0</strong></span>
+        </div>
+      </section>
 
+      <section class="board-wrap">
+        <div id="hoverRow" class="hover-row"></div>
+        <div id="board" class="board" aria-label="Connect 4 board"></div>
+      </section>
 
-    <button id="reset-button">Restart Game</button>
-  </div>
+      <section class="message-area">
+        <div id="message"></div>
+      </section>
+    </main>
+
+    </section>
 
   <script src="script.js"></script>
 </body>
