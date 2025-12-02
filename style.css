@@ -1,160 +1,195 @@
+/* =========================================
+   1. VARIABLES (Original Design)
+   ========================================= */
 :root {
-    --rows: 6;
-    --cols: 7;
-    --cell-size: 60px;
+  --bg: #0f172a;        /* Main Background */
+  --panel: #111827;     /* Top/Bottom Panels */
+  --accent: #22c55e;    /* Green Highlight */
+  --text: #e5e7eb;      /* Text Color */
+  --muted: #94a3b8;     /* Muted Text */
+  --red: #ef4444;       /* Player 1 */
+  --yellow: #f59e0b;    /* Player 2 */
+  --cell: #1f2937;      /* Board Cell Color */
+  --cellHole: #0b1222;  /* Hole Depth Color */
 }
+
+* { box-sizing: border-box; }
+
+html { height: 100%; }
 
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f0f0f0;
-    margin: 0;
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  background: radial-gradient(1200px 600px at 10% 10%, #101a37, var(--bg));
+  color: var(--text);
 }
 
-.container {
-    text-align: center;
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.hidden { display: none !important; }
+
+/* =========================================
+   2. START SCREEN
+   ========================================= */
+.start-screen {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  gap: 30px; padding: 20px;
+}
+.main-title {
+  font-size: 3.5rem; margin: 0;
+  text-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+}
+.accent-text { color: var(--accent); }
+
+.menu-controls {
+  display: flex; flex-direction: column; gap: 15px; width: 300px;
+}
+.btn-large {
+  width: 100%; padding: 15px; font-size: 1.1rem;
+  justify-content: center; font-weight: 600;
 }
 
-h1 {
-    color: #333;
+/* =========================================
+   3. GAME INTERFACE
+   ========================================= */
+.game-container {
+  min-height: 100vh; display: flex; flex-direction: column;
 }
 
-#status {
-    margin: 20px 0;
-    font-size: 1.2em;
-    font-weight: bold;
+.topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 20px; background: var(--panel); border-bottom: 1px solid #1f2937;
 }
+.controls, .difficulty-group { display: flex; gap: 8px; align-items: center; }
 
-#game-board {
-    display: grid;
-    /* Create a 7-column grid for the board */
-    grid-template-columns: repeat(var(--cols), var(--cell-size));
-    background-color: #4169e1; /* Connect Four Blue */
-    border: 5px solid #2a52be;
-    border-radius: 10px;
-    padding: 5px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-    cursor: pointer; /* Indicates the board is clickable */
+select, .btn {
+  background: #0b1222; color: var(--text); border: 1px solid #1f2937;
+  padding: 8px 12px; border-radius: 8px; outline: none; cursor: pointer;
+  transition: all 0.2s;
 }
+select:hover, .btn:hover { border-color: #334155; }
+.btn.primary { background: var(--accent); color: #050911; border-color: var(--accent); font-weight: 700; }
+.btn.secondary { background: #0b1222; border-color: #374151; color: var(--muted); }
 
-.cell {
-    width: var(--cell-size);
-    height: var(--cell-size);
-    /* Make the cell look like a circular hole */
-    background-color: #ffffff;
-    border-radius: 50%;
-    margin: 3px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-    /* Flexbox to center the piece inside the cell */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s ease;
-}
-
-/* Styles for the pieces dropped inside the cell */
-.piece {
-    width: calc(var(--cell-size) - 10px);
-    height: calc(var(--cell-size) - 10px);
-    border-radius: 50%;
-    /* Start the piece off-screen for a dropping animation */
-    transform: translateY(-500%); 
-    transition: transform 0.5s ease-out; /* Animation for dropping */
-}
-
-/* Actual color of the pieces */
-.red {
-    background-color: #ff0000;
-}
-
-.yellow {
-    background-color: #ffc400;
-}
-
-/* Style to make the piece drop into place */
-.dropped {
-    transform: translateY(0);
-}
-
-#reset-button {
-    padding: 10px 20px;
-    font-size: 1em;
-    margin-top: 20px;
-    cursor: pointer;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-#reset-button:hover {
-    background-color: #555;
-}
-
-/* Indicate which column the mouse is over */
-.cell:hover {
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), inset 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Styling for the current player indicator */
-#current-player.red {
-    color: #ff0000;
-}
-
-#current-player.yellow {
-    color: #ffc400;
-}
-
-/* New styles for difficulty selector */
-.controls {
-    margin-bottom: 15px;
-    font-size: 1.1em;
-}
-
-#difficulty {
-    padding: 5px;
-    border-radius: 4px;
-    margin-left: 10px;
-}
-
-
-  /* Center the scoreboard and give basic styling */
-  #scoreboard {
-
-    text-align: center;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-  }
-
-  /* Style the title */
-  #scoreboard h2 {
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: #333;
-  }
-
-  /* Style the scores */
-  #scoreboard p {
-    font-size: 16px;
-    font-weight: bold;
-  }
-
-  #human-score {
-    color: red;
-  }
-
-  #ai-score {
-    color: goldenrod;
-  }
-
-
+/* Winner Banner */
+.win-banner {
+  height: 40px; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  font-size: 2rem; 
+  font-weight: 800; 
+  text-transform: uppercase;
+  color: var(--accent);
+  text-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
   
+  /* UPDATED: Increased margin to push it down */
+  margin-top: 25px; 
+  margin-bottom: 10px; /* Added a little space below it too */
+}
 
+/* Status Bar & Glows */
+.statusbar {
+  display: flex; justify-content: space-between; align-items: center;
+  /* UPDATED: Adjusted padding to lift content "higher" */
+  padding: 5px 20px 15px 20px; 
+  color: var(--muted);
+  /* Optional: slightly shift up visually */
+  transform: translateY(-2px);
+}
+
+.turn { font-weight: 600; transition: text-shadow 0.3s; }
+.turn.red-glow { color: #f87171; text-shadow: 0 0 15px rgba(239, 68, 68, 0.8); }
+.turn.yellow-glow { color: #fbbf24; text-shadow: 0 0 15px rgba(245, 158, 11, 0.8); }
+
+.board-wrap {
+  display: grid; place-items: center; padding: 10px 16px; flex: 1;
+}
+
+/* =========================================
+   4. THE BOARD (Visual Layering)
+   ========================================= */
+.board {
+  width: min(90vw, 700px); aspect-ratio: 7 / 6;
+  background: #0d1b39; 
+  border-radius: 18px; padding: 10px;
+  box-shadow: inset 0 0 0 2px #1e293b, 0 8px 40px rgba(0,0,0,0.35);
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px;
+  position: relative; 
+}
+
+/* LAYER 3 (TOP): THE BLUE SQUARE FRAME */
+.cell {
+  position: relative; width: 100%; height: 100%;
+  border-radius: 12px;
+  background: radial-gradient(circle closest-side, transparent 60%, var(--cell) 62%);
+  box-shadow: inset 0 0 0 2px #334155; 
+  z-index: 10;
+}
+
+/* LAYER 1 (BOTTOM): THE HOLE DEPTH */
+.hole-bg {
+  position: absolute; inset: 6px;
+  border-radius: 50%;
+  background: radial-gradient(60% 60% at 50% 38%, #0f1a34, var(--cellHole));
+  box-shadow: inset 0 4px 12px rgba(0,0,0,0.6);
+  z-index: 1; 
+}
+
+/* LAYER 2 (MIDDLE): THE DISC */
+.disc {
+  position: absolute; inset: 6px; border-radius: 50%;
+  box-shadow: inset 0 6px 14px rgba(255,255,255,0.25), inset 0 -6px 14px rgba(0,0,0,0.3), 0 6px 16px rgba(0,0,0,0.4);
+  z-index: 5; 
+}
+.disc.red { background: linear-gradient(#f87171, var(--red)); }
+.disc.yellow { background: linear-gradient(#fbbf24, var(--yellow)); }
+
+
+/* =========================================
+   5. HOVER INDICATORS
+   ========================================= */
+.hover-row {
+  width: min(90vw, 700px);
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px;
+  margin-bottom: 8px; height: 30px;
+  position: relative; z-index: 20;
+  padding: 0 10px; 
+}
+
+/* UPDATED: Made slots square (rounded rects) again */
+.hover-slot {
+  position: relative; 
+  cursor: pointer; 
+  border-radius: 12px; /* Square with rounded corners */
+  border: 1px dashed transparent; /* Placeholder for hover effect */
+  transition: all 0.2s;
+}
+.hover-slot:hover { 
+  background: #0b1222; 
+  border-color: #334155; 
+}
+
+/* The Ghost Disc inside the square slot */
+.hover-disc {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 26px; aspect-ratio: 1; border-radius: 50%;
+  opacity: 1; transition: all 0.2s;
+}
+.hover-disc.red { background: var(--red); box-shadow: 0 0 10px var(--red); }
+.hover-disc.yellow { background: var(--yellow); box-shadow: 0 0 10px var(--yellow); }
+
+.message-area { display: grid; place-items: center; padding: 5px; min-height: 24px;}
+#message { font-weight: 600; color: var(--accent); }
+
+/* REMOVED .footer styles as requested */
+
+/* Winning Ring */
+.win-ring {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 4px solid #22c55e;
+  box-shadow: 0 0 20px #22c55e;
+  z-index: 20; animation: pulse 1s infinite;
+}
+@keyframes pulse { 50% { opacity: 0.6; } }
