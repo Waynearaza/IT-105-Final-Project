@@ -6,13 +6,13 @@
 * **[Carlo Creus]** - *[Role, e.g., AI Algorithm]*
 * **[Aerionne Wayne Araza]** - *[Role, e.g., Quality Assurance]*
 
-## 📖 Description
+## Description
 
 This project is a browser-based recreation of Connect 4. The goal is simple: be the first to connect four of your colored discs in a row (horizontally, vertically, or diagonally). The game features a polished dark-mode interface with "glass-like" board effects where pieces realistically fall behind the board slots.
 
 It was designed to run natively in any modern web browser without the need for external libraries or frameworks.
 
-## ✨ Features
+## Features
 
 * **Game Modes:**
     * **PvP (Local):** Play against a friend on the same device.
@@ -31,13 +31,13 @@ It was designed to run natively in any modern web browser without the need for e
     * Win/Draw detection.
     * Instant Rematch functionality.
 
-## 📸 Screenshots
+## Screenshots
 
 ### Start Screen
 ![Start Screen Placeholder](https://github.com/Waynearaza/IT-105-Final-Project/blob/5e947cff730349ef791b7fb6d9d9eb868127e9f8/Home%20Page.png)
 ### Gameplay (Dark Mode UI)
 ![Gameplay Placeholder](https://github.com/Waynearaza/IT-105-Final-Project/blob/5e947cff730349ef791b7fb6d9d9eb868127e9f8/PlayState.png)
-## 🚀 Run Instructions
+## Run Instructions
 
 Since this project uses vanilla HTML/CSS/JS, no complex build steps or package managers (like npm) are required.
 
